@@ -16,11 +16,11 @@ Public-key cryptography is used to sign each patient Note-Summary, which adds a 
 
 ## Protocol specification
 
-For detailed information about the protocol, you can refer to the Desilo Protocol Specification Proposals [DPSPs] which outline the technical details and message formats used in Desilo.
+For detailed information about the protocol, you can refer to the Desilo Improvement Proposals [DIPs] which outline the technical details and message formats used in Desilo.
 
 ## Getting started
 
-Our goal is for Desilo to be the product of many minds across disciplines and will evolve as various contributors submit DPSPs and the Desilo Protocol Specification set develops.
+Our goal is for Desilo to be the product of many minds across disciplines and will evolve as various contributors submit DIPs and the Desilo Protocol Specification set develops.
 
 ## Licence
 
