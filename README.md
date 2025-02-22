@@ -2,11 +2,25 @@
 
 As a junior doctor, I often faced the critical task of treating elderly patients who couldn't provide a reliable medical history in the middle of the night. With no family to call, no local records, and a closed GP surgery, the risk of missing life-saving medication was high. This struggle to piece together scattered and fragmented patient information is a challenge faced by clinicians worldwide. Desilo aims to solve this by securely fetching and sharing essential patient notes between hospital sites, providing a vital picture for healthcare providers.
 
-<img src="Resources/diagram.png">(https://github.com/drmikesamy/desilo/tree/main/Resources/diagram.png)
+[<img src="Resources/diagram.png">](https://github.com/drmikesamy/desilo/tree/main/Resources/diagram.png)
 
-Desilo is a simple and open protocol designed to securely fetch siloed patient notes between hospital sites using interoperability standards. It leverages a central authentication and authorisation provider, end-to-end encryption and signatures to ensure data security and integrity, and is built to be resilient without relying on any central trusted server which can be compromised, leading to the catastrophic data breaches we often see in the news, even from reputable companies.
+Desilo is a simple and open protocol designed to securely fetch siloed patient notes between hospital sites using interoperability standards. It leverages encrypted websocket connections and cryptographic signatures to ensure data security and integrity, and is built to be resilient without relying on a monolithic national patient database which can be compromised, leading to the catastrophic data breaches we often see in the news, even from reputable companies.
 
 The Desilo Protocol is inspired by the Nostr Protocol, but has been modified in order to meet the the data security and regulatory requirements of healthcare.
+
+### Desilo Authentication Service
+
+Due to the importance of robust authentication in healthcare, so only accredited healthcare providers can access patient data, a central Authentication Service is used, with issues JSON Web Tokens to allow both access and granular authentication grants so clinicians can have carefully scoped access.
+
+### Desilo Locator Service
+
+This is a simple lookup service which returns, for a given patient ID string, the websocket urls of DCache servers across the country which hold data about them.
+
+### Desilo DCaches
+
+The DCaches are where all the patient data snippets, or Note-Summaries, are stored for later retrieval by an authorised clinician. 
+
+DCaches are extremely simple, small and easy to set up servers which do two things. The first is that they store data in a database, namely FHIR snippets mapped to a patient identifier, with metadata tags and Kinds for easy filtering. The second is to expose an API which accepts a request with filter parameters. When queried, they verify the access token and send the data. When Note-Summaries are posted to them, they verify the access token and write the data to the database. That's all.
 
 ## How it works
 
