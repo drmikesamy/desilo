@@ -248,9 +248,9 @@ DCaches expose a websocket endpoint to which clients can connect. Clients SHOULD
 
 Clients can send 3 types of messages, which must be JSON arrays, according to the following patterns:
 
-  * `{"Type": "SUMMARYNOTE", "Payload": <Summary-Note JSON as defined above>}`, used to publish Summary-Notes to a given DCache.
-  * `{"Type": "REQ", "SubscriptionId": <subscription_id>, "Filters": [<filters1>, <filters2>, ...]}`, used to request Summary-Notes and subscribe to new updates.
-  * `{"Type": "CLOSE", "SubscriptionId": <subscription_id>}`, used to stop previous subscriptions.
+  * `{"Type": "NoteSummary", "Payload": <Summary-Note JSON as defined above>}`, used to publish Summary-Notes to a given DCache.
+  * `{"Type": "Req", "SubscriptionId": <subscription_id>, "Filters": [<filters1>, <filters2>, ...]}`, used to request Summary-Notes and subscribe to new updates.
+  * `{"Type": "Close", "SubscriptionId": <subscription_id>}`, used to stop previous subscriptions.
 
 `<subscription_id>` is an arbitrary, non-empty string of max length 64 chars. It represents a subscription per connection. DCaches MUST manage `<subscription_id>`s independently for each WebSocket connection. `<subscription_id>`s are not guaranteed to be globally unique.
 
