@@ -1,4 +1,4 @@
-# Desilo - A Secure Protocol for Fetching Siloed Patient Notes
+# Desilo - A Secure Protocol for Fetching Siloed Health Data
 
 As a junior doctor, I often faced the critical task of treating elderly patients who couldn't provide a reliable medical history in the middle of the night. With no family to call, no local records, and a closed GP surgery, the risk of missing life-saving medication was high. This struggle to piece together scattered and fragmented patient information is a challenge faced by clinicians worldwide. Desilo aims to solve this by securely fetching and sharing essential patient notes between hospital sites, providing a vital picture for healthcare providers.
 
