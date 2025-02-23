@@ -78,7 +78,7 @@ Tags are used to help sort through Note-Summaries. They are simple key-value pai
 
 ### Kinds
 
-Kinds specify how clients should interpret the meaning of each Summary-Note. A `kind:0` Summary-Note is basic patient details:
+Kinds specify how clients should interpret the meaning of each Note-Summary. A `kind:0` Note-Summary is basic patient details:
 
 ```jsonc
 {
@@ -188,9 +188,9 @@ Kinds specify how clients should interpret the meaning of each Summary-Note. A `
 }
 
 ```
-A `kind:1` Summary-Note is a simple text entry, like a GP would enter after seeing a patient.
+A `kind:1` Note-Summary is a simple text entry, like a GP would enter after seeing a patient.
 
-A `kind:2` Summary-Note is a Past Medical History and the Content field would be represented in FHIR format like so. Kinds can be expanded on and there will be standardised kinds things like serialised ECG data:
+A `kind:2` Note-Summary is a Past Medical History and the Content field would be represented in FHIR format like so. Kinds can be expanded on and there will be standardised kinds things like serialised ECG data:
 
 ```jsonc
 {
@@ -248,32 +248,32 @@ DCaches expose a websocket endpoint to which clients can connect. Clients SHOULD
 
 Clients can send 3 types of messages, which must be JSON arrays, according to the following patterns:
 
-  * `{"Type": "NoteSummary", "Payload": <Summary-Note JSON as defined above>}`, used to publish Summary-Notes to a given DCache.
-  * `{"Type": "Req", "SubscriptionId": <subscription_id>, "Filters": [<filters1>, <filters2>, ...]}`, used to request Summary-Notes and subscribe to new updates.
+  * `{"Type": "NoteSummary", "Payload": <Summary-Note JSON as defined above>}`, used to publish Note-Summaries to a given DCache.
+  * `{"Type": "Req", "SubscriptionId": <subscription_id>, "Filters": [<filters1>, <filters2>, ...]}`, used to request Note-Summaries and subscribe to new updates.
   * `{"Type": "Close", "SubscriptionId": <subscription_id>}`, used to stop previous subscriptions.
 
 `<subscription_id>` is an arbitrary, non-empty string of max length 64 chars. It represents a subscription per connection. DCaches MUST manage `<subscription_id>`s independently for each WebSocket connection. `<subscription_id>`s are not guaranteed to be globally unique.
 
-`<filtersX>` is a JSON object that determines what Summary-Notes will be sent in that subscription, it can have the following attributes:
+`<filtersX>` is a JSON object that determines what Note-Summaries will be sent in that subscription, it can have the following attributes:
 
 ```json
 {
-  "Ids": "<a list of summary-note ids>",
+  "Ids": "<a list of Note-Summary ids>",
   "PatientId": "<patient id>",
-  "Authors": "<a list of lowercase pubkeys, the pubkey of a summary-note must be one of these>",
+  "Authors": "<a list of lowercase pubkeys, the pubkey of a Note-Summary must be one of these>",
   "Kinds": "<a list of kind numbers>",
   "Tags": [{"Key": "<tag key>", "Value": "<search criteria for given tag>"}],
   "Since": "<an integer unix timestamp in seconds. Events must have a created_at >= to this to pass>",
   "Until": "<an integer unix timestamp in seconds. Events must have a created_at <= to this to pass>",
-  "Limit": "<maximum number of summary-notes relays SHOULD return in the initial query>"
+  "Limit": "<maximum number of Note-Summary relays SHOULD return in the initial query>"
 }
 ```
 
-Upon receiving a `REQ` message, the relay SHOULD return Summary-Notes that match the filter. Any new Summary-Notes it receives SHOULD be sent to that same websocket until the connection is closed, a `CLOSE` Summary-Note is received with the same `<subscription_id>`, or a new `REQ` is sent using the same `<subscription_id>` (in which case a new subscription is created, replacing the old one).
+Upon receiving a `REQ` message, the relay SHOULD return Note-Summaries that match the filter. Any new Note-Summaries it receives SHOULD be sent to that same websocket until the connection is closed, a `CLOSE` Note-Summary is received with the same `<subscription_id>`, or a new `REQ` is sent using the same `<subscription_id>` (in which case a new subscription is created, replacing the old one).
 
 Lists of Filter objects containing different criteria can be submitted. These should be treated with an OR operator approach.
 
-### From DCache to client: sending Summary-Notes and notices
+### From DCache to client: sending Note-Summaries and notices
 
 DCaches can send 5 types of messages, which must also be JSON arrays, according to the following patterns:
 
@@ -290,7 +290,7 @@ DCaches can send 5 types of messages, which must also be JSON arrays, according 
   "Message": "<message>"
 },
 {
-  "Type": "ENDOFSTREAM",
+  "Type": "EndOfStream",
   "SubscriptionId": "<subscriptionId>"
 },
 {
