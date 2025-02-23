@@ -4,7 +4,7 @@ As a junior doctor, I often faced the critical task of treating elderly patients
 
 [<img src="Resources/diagram.png">](https://github.com/drmikesamy/desilo/tree/main/Resources/diagram.png)
 
-Desilo is a simple and open protocol designed to securely fetch siloed patient notes between hospital sites using interoperability standards. It leverages encrypted websocket connections and cryptographic signatures to ensure data security and integrity, and is built to be resilient without relying on a monolithic national patient database which can be compromised, leading to the catastrophic data breaches we often see in the news, even from reputable companies.
+Desilo is a simple and open protocol designed to securely fetch siloed patient notes in HL7 FHIR format between hospital sites using interoperability standards. It leverages encrypted websocket connections and cryptographic signatures to ensure data security and integrity, and is built to be resilient without relying on a monolithic national patient database which can be compromised, leading to the catastrophic data breaches we often see in the news, even from reputable companies.
 
 The Desilo Protocol is inspired by the Nostr Protocol, but has been modified in order to meet the the data security and regulatory requirements of healthcare.
 
@@ -24,7 +24,7 @@ DCaches are extremely simple, small and easy to set up servers which do two thin
 
 ## How it works
 
-The concept is straightforward: each hospital site can publish vital patient Note-Summaries, like the last x appointments, pending investigations, current drug regime, past medical history, or allergies, to their own, or another care provider's DCache that can be instantly deployed with very little setup, cost, complexity, tailoring, or overhead. These servers simply perform two functions: store messages and accept authenticated requests. Healthcare providers at different sites can connect to and make requests (containing filter parameters) from these DCaches to securely fetch the required patient notes. The protocol defines the messages exchanged between clients and DCaches to publish and fetch patient notes securely.
+The concept is straightforward: each hospital site can publish vital patient Note-Summaries, like appointment notes, investigation results, regular medications and allergies, past medical history, or any other health data in FHIR format, to their own, or another care provider's DCache that can be instantly deployed with very little setup, cost, complexity, tailoring, or overhead. These servers simply perform two functions: store messages and accept authenticated requests. They can only be updated by authorised care providers or patients. Healthcare providers at different sites can connect to and make requests (containing filter parameters) from these DCaches to securely fetch the required patient notes. The protocol defines the messages exchanged between clients and DCaches to publish and fetch patient notes securely.
 
 DCaches can be hosted on-site, delegated to cloud providers like Azure or AWS controlled by the care setting, or outsourced to a third-party supplier. Each care setting can also publish Note-Summaries to the DCaches run by other care providers, depending on the rules set by the provider, if they are perhaps smaller and don't have the technical know-how. The intention is to create a secure, low-risk, cost-effective, access-controlled layer for the sharing of vital patient data.
 
