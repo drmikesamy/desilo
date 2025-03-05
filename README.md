@@ -22,6 +22,10 @@ The DCaches are where all the patient data snippets, or Note-Summaries, are stor
 
 DCaches are extremely simple, small and easy to set up servers which do two things. The first is that they store data in a database, namely FHIR snippets mapped to a patient identifier, with metadata tags and Kinds for easy filtering. The second is to expose an API which accepts a request with filter parameters. When queried, they verify the access token and send the data. When Note-Summaries are posted to them, they verify the access token and write the data to the database. That's all.
 
+### Multi-provider access, with full patient control over personal data
+
+The authentication service and interoperability with NHS Digital services will be a user experience enhancement. The protocol also allows for a personal health record, self hosted on your own server, with all data encrypted at rest, with the option to delegate authority to named clinicians. Your private keys are stored on your phone and you can keep as many backup keys as you want, guarding redundant copies of your data, stored anywhere, using public key cryptography.
+
 ## How it works
 
 The concept is straightforward: each hospital site can publish vital patient Note-Summaries, like appointment notes, investigation results, regular medications and allergies, past medical history, or any other health data in FHIR format, to their own, or another care provider's DCache that can be instantly deployed with very little setup, cost, complexity, tailoring, or overhead. These servers simply perform two functions: store messages and accept authenticated requests. They can only be updated by authorised care providers or patients. Healthcare providers at different sites can connect to and make requests (containing filter parameters) from these DCaches to securely fetch the required patient notes. The protocol defines the messages exchanged between clients and DCaches to publish and fetch patient notes securely.
