@@ -10,7 +10,7 @@
 - Click the **"Fork" button** in the top-right corner to create your own personal copy of the repository in your account.
 
 ### Step 3: Edit Files
-- Click your username at the top-right of the page to see your repositories.  
+- Click your username at the top-left of the page to see your repositories.  
 - Select the forked Desilo repository and navigate to the file you want to edit.  
 - Click the **pencil icon** (at the top-right of the file view) to edit the file directly in your browser. You can switch between Edit and Preview modes at the top of the editing area to see how your changes look.
 
